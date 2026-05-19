@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	// Container definition for data science development environment (NVIDIA GPU)
+	// Based on nvidia/cuda:12.8.1-runtime-ubuntu24.04 with data science packages
+	// See here: https://hub.docker.com/r/gperdrizet/datascience-nvidia
+	"name": "DataScience NVIDIA",
+	"image": "gperdrizet/datascience-nvidia",
+    "runArgs": [
+		"--gpus", "all",              // Enable all available GPUs in the container
+		"--pid=host",                 // Use host PIDs, needed for nvidia-smi process list
+		"--ipc=host",                 // Connect to host interprocess namespace
+		"--ulimit", "memlock=-1",     // Turn off memory lock limit
+		"--ulimit", "stack=67108864", // Increase process stack limit to 64 MB
+		"--publish", "8888:8888",     // Map JupyterLab port for easy access
+		"--network=bridge"            // Explicitly use bridge network for internet access
+	],
+	"remoteUser": "vscode",           // Use the 'vscode' user provided by the base image
+
+	// Custom configuration options
+	"customizations": {
+
+	  // Configure VS Code settings and extensions
+	  "vscode": {
+
+		// Use 'settings' to set default VS Code values on container create
+		"settings": {
+			// Set the default Python interpreter
+			"python.defaultInterpreterPath": "/usr/bin/python",
+
+			// Disable automatic port forwarding to give explicit control
+			"remote.restoreForwardedPorts": false
+		},
+
+		// Extensions for Python data science work
+		"extensions": [
+		  "-dbaeumer.vscode-eslint",                // Explicitly exclude ESLint (not needed for Python projects)
+		  "ms-python.python",                       // Core Python language support, IntelliSense, debugging
+		  "ms-toolsai.jupyter",                     // Jupyter notebook support for interactive data science
+		  "streetsidesoftware.code-spell-checker"   // Spell checking for code and documentation
+		]
+	  }
+	},
+
+	// Create data and notebooks directories on first container creation
+	"onCreateCommand": "mkdir -p data && mkdir -p notebooks",
+
+	// Use 'postCreateCommand' to run commands once after the container is created
+	"postCreateCommand": "",
+
+	// Use 'postAttachCommand' to run commands each time a user connects to the container
+	"postAttachCommand": ""
+}
