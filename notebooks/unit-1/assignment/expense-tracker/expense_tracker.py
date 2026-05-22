@@ -40,7 +40,7 @@ def add_expense(expenses):
     
     expenses.append(expense)
     print(f"Added: {category} - ${amount:.2f} on {date}")
-    pass
+    
 
 
 def view_expenses(expenses):
@@ -63,11 +63,11 @@ def view_expenses(expenses):
             f"{i}. {expense['date']} | {expense['category']:<10} | "
             f"${expense['amount']:>8.2f} | {expense['description']}"
         )
-    pass
+    
 
 
 
-    pass
+    
 def set_budget():
     """Prompt user for a monthly budget amount and return it."""
     print("\n--- Set Monthly Budget ---")
@@ -108,14 +108,40 @@ def track_budget(expenses, budget):
 
 def save_expenses(expenses, filename):
     """Write the expenses list to a CSV file."""
-    pass
+    fieldnames = ["date", "category", "amount", "description"]
+    
+    try:
+        with open(filename, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(expenses)
+        print(f"Saved {len(expenses)} expense(s) to {filename}")
+    except IOError as e:
+        print(f"Error saving expenses: {e}")
 
 
 def load_expenses(filename):
     """Read expenses from a CSV file and return as a list of dicts."""
-    # For now, just return an empty list. We'll implement CSV loading later.
-    return []
-    pass
+    if not os.path.exists(filename):
+        return []
+    
+    expenses = []
+    try:
+        with open(filename, "r", newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # Convert amount back to float (CSV reads everything as strings)
+                try:
+                    row["amount"] = float(row["amount"])
+                except (ValueError, KeyError):
+                    print(f"Skipping row with invalid amount: {row}")
+                    continue
+                expenses.append(row)
+        print(f"Loaded {len(expenses)} expense(s) from {filename}")
+    except IOError as e:
+        print(f"Error loading expenses: {e}")
+    
+    return expenses
 
 
 def display_menu():
