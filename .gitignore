@@ -1,2 +1,5 @@
 __pycache__
 data
+expenses.csv
+users.json
+tasks.json
