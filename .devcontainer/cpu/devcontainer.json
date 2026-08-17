@@ -40,7 +40,7 @@
 	"onCreateCommand": "mkdir -p data && mkdir -p notebooks",
 
 	// Use 'postCreateCommand' to run commands once after the container is created
-	"postCreateCommand": "",
+	"postCreateCommand": "pip install imbalanced-learn scikit-surprise",
 
 	// Use 'postAttachCommand' to run commands each time a user connects to the container
 	"postAttachCommand": ""
