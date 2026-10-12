@@ -1,0 +1,20 @@
+{
+  "model": "TF-IDF + Logistic Regression",
+  "best_params": {
+    "clf__C": "3",
+    "tfidf__ngram_range": "(1, 2)"
+  },
+  "cv_macro_f1": 0.7361,
+  "test_accuracy": 0.7881,
+  "test_macro_f1": 0.7338,
+  "test_weighted_f1": 0.784,
+  "per_class_f1": {
+    "CASA": 0.7811,
+    "Credit Cards": 0.7917,
+    "Credit Reports": 0.7707,
+    "Loans": 0.8352,
+    "Mortgage": 0.9065,
+    "Others": 0.4,
+    "Remittance": 0.6512
+  }
+}
