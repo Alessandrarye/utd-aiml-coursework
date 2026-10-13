@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+__pycache__/
+# regenerated on every run; about 30 MB
+outputs/feedback_with_sentiment.csv
+outputs/unified_churn_sentiment.csv
