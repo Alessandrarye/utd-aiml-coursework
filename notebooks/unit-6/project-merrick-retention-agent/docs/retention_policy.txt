@@ -1,0 +1,37 @@
+Retention Policy — Customer Engagement & Offers
+
+Our primary goal is to retain valued customers by understanding their needs and offering customized solutions.
+
+1. Retention Philosophy
+   - Retention is driven by empathy and transparency.
+   - Agents should focus on understanding pain points rather than offering immediate discounts.
+
+2. Customer Segmentation for Retention
+   - High-value customers: tenure > 3 years or credit score > 750.
+   - Moderate-value customers: tenure 1–3 years or credit score between 650–750.
+   - Low-value customers: tenure < 1 year or credit score < 650.
+
+3. Retention Offers
+   - High-value: fee waiver up to ₹1,000, bonus reward points, or interest reduction of 0.5%.
+   - Moderate-value: 50% annual fee waiver or EMI interest reduction.
+   - Low-value: free add-on card or personalized financial counselling.
+
+4. Escalation Rules
+   - Agents should never promise offers beyond policy limits.
+   - Any exception for customers with special circumstances must be approved by the Retention Desk Manager.
+
+5. Churn Prevention Signals
+   - Negative feedback in the past 60 days.
+   - Inactivity for more than 90 days.
+   - Frequent service complaints.
+   - Drop in average monthly balance or spend by >40%.
+
+6. Retention Script Guidelines
+   - Use the customer’s first name.
+   - Acknowledge their concern directly.
+   - Offer one relevant retention option.
+   - End with a clear action (e.g., “I’ve applied a ₹500 waiver to your next bill.”).
+
+7. Success Metrics
+   - Retention rate improvement (target: +8% annually).
+   - Average resolution time: < 10 minutes per call/chat.

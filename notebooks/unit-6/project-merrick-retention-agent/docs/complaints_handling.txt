@@ -1,0 +1,35 @@
+Complaints Handling — Policy and Process
+
+1. Objective
+   Ensure every customer complaint is acknowledged and resolved promptly, maintaining high satisfaction scores.
+
+2. Response Timeline
+   - Acknowledgment within 24 hours.
+   - Resolution within 5 working days.
+   - Complex cases may take up to 10 days.
+
+3. Channels for Complaint
+   - Toll-free number
+   - Email support
+   - Chatbot or live chat
+   - Social media escalation
+
+4. Classification
+   - Category A: Billing, fees, interest disputes.
+   - Category B: Service delay, staff behavior, or app malfunction.
+   - Category C: Fraud or security issues (handled with highest priority).
+
+5. Compensation
+   - Billing errors: refund or reversal within 3 days.
+   - System outage: service credits up to ₹200.
+   - Fraud cases: provisional refund within 5 working days, subject to investigation.
+
+6. Customer Assurance
+   - Each complaint gets a unique tracking ID.
+   - Weekly progress updates are shared via email or SMS.
+   - Complaints unresolved beyond 10 days escalate automatically to the Nodal Officer.
+
+7. Tone of Communication
+   - Always start with an apology.
+   - Avoid technical jargon.
+   - Confirm satisfaction before closing the ticket.

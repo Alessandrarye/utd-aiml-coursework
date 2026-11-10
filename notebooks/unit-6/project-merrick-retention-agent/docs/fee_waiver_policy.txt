@@ -1,0 +1,26 @@
+Fee Waiver Policy
+
+1. Eligibility
+   - Active customer for at least 12 months.
+   - No late payment in the last 3 cycles.
+   - Credit score >700 or verified financial hardship.
+
+2. Types of Fee Waivers
+   - Annual Fee Waiver: applicable once per card per 12 months.
+   - Late Payment Waiver: one-time waiver for accidental delays within 5 days.
+   - Over-limit Fee Waiver: for customers who pay full outstanding within the same billing cycle.
+
+3. Approval Process
+   - Auto-approval for eligible customers with tenure >24 months.
+   - Manual review by retention team for all others.
+   - Requests must be logged in CRM with justification.
+
+4. Exclusions
+   - Waivers not applicable for cash advance fees, EMI conversion fees, or reward redemption charges.
+
+5. Communication Template
+   “We appreciate your long association with us. As a gesture of goodwill, we have waived your recent ₹500 annual fee. Your loyalty means a lot to us.”
+
+6. Record Keeping
+   - All waivers must be recorded in the customer’s retention history.
+   - Audit logs retained for 3 years.

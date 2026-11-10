@@ -1,0 +1,7 @@
+test,sources,expected_source_retrieved,citations_valid,personalized,handled_missing,grounding,personalization,tone,coherence,comment
+Fee waiver (general),"faq_accounts.md, fee_waiver_policy.txt, retention_policy.txt",True,True,,,5,5,5,5,The answer is clear and well-structured.
+Retention offer (ID in question),retention_policy.txt,True,True,True,,5,5,5,5,The answer is clear and aligns well with the retention policy.
+Gold vs Platinum,"product_summary.txt, rewards_and_benefits.txt",True,True,,,5,5,5,5,The answer clearly explains the differences without assuming customer details.
+At-risk customer wants to leave,"faq_accounts.md, fee_waiver_policy.txt, retention_policy.txt",,True,True,,5,4,5,5,The answer is clear and provides relevant information while addressing the customer's concerns.
+Unknown customer ID,"fee_waiver_policy.txt, retention_policy.txt",True,,,True,5,5,5,5,The answer is clear and appropriately addresses the lack of customer information.
+Off-topic question,(none),,,,True,5,5,5,5,The answer is clear and appropriately addresses the lack of information.

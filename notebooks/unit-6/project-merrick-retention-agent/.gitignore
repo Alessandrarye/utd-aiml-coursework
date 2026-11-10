@@ -1,0 +1,12 @@
+# secrets
+.env
+
+# datasets stay local (delete this line if the CSVs should be pushed)
+data/*.csv
+
+# generated files
+index/index.faiss
+index/index.pkl
+__pycache__/
+.ipynb_checkpoints/
+.gradio/
