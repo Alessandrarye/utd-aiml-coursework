@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# MLflow tracking store and run artifacts (rebuilt by running the notebook)
+mlruns/
+mlflow.db
+
+# Runtime logs
+logs/
+
+# Trained model binary (rebuilt by `python -m src.train`)
+models/*.joblib

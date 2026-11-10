@@ -1,0 +1,11 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.ipynb
+data/
+mlruns/
+mlflow.db
+logs/
+README.md

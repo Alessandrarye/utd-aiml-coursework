@@ -1,0 +1,7 @@
+# Written by src/train.py. Pins the libraries the saved model needs.
+scikit-learn==1.9.0
+pandas==2.2.3
+numpy==1.26.4
+joblib==1.5.3
+fastapi
+uvicorn[standard]
