@@ -1,0 +1,2 @@
+$ python -m pipeline.trigger   # nothing changed
+No change in data, code, or params. Pipeline not triggered.

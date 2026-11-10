@@ -1,0 +1,28 @@
+{
+  "model_name": "titanic-survival-classifier",
+  "model_version": 1,
+  "model_type": "xgboost",
+  "mlflow_run_id": "77f8c642552641478a101539bb616fed",
+  "git_sha": "cb982544ba3b4ae2681ea1b5194e1c5161dda3bc",
+  "data_md5": "2309cc5f04782ed9bb6016d9f4e381cf",
+  "trained_at": "2026-11-10T20:58:07+00:00",
+  "sklearn_version": "1.9.0",
+  "test_metrics": {
+    "accuracy": 0.8351,
+    "precision": 0.8548,
+    "recall": 0.7067,
+    "f1": 0.7737,
+    "roc_auc": 0.8485
+  },
+  "input_features": [
+    "Pclass",
+    "Name",
+    "Sex",
+    "Age",
+    "SibSp",
+    "Parch",
+    "Fare",
+    "Cabin",
+    "Embarked"
+  ]
+}

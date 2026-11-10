@@ -1,0 +1,49 @@
+name: mlops-pipeline
+
+# Triggers: any push or pull request that touches data, code, or parameters,
+# a weekly scheduled retrain and drift check, and a manual button.
+on:
+  push:
+    branches: [main]
+    paths: ["data/**", "src/**", "api/**", "pipeline/**", "tests/**", "params.yaml", "requirements.txt"]
+  pull_request:
+    paths: ["data/**", "src/**", "api/**", "pipeline/**", "tests/**", "params.yaml", "requirements.txt"]
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      # If the raw data lives in a DVC remote instead of Git, pull it here:
+      # - run: dvc pull data/raw/titanic.csv
+      - name: Validate, test, train, gate, smoke test, monitor
+        run: python -m pipeline.run_pipeline
+      - name: Upload model, metrics, and monitoring reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-outputs
+          path: |
+            models/
+            reports/
+
+  # Runs only on main after the pipeline job passes. Builds the serving image.
+  # Add a registry login and push step here to ship it to your environment.
+  build-image:
+    needs: pipeline
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: pipeline-outputs
+      - run: docker build -t titanic-api:${{ github.sha }} .

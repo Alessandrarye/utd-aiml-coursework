@@ -1,0 +1,10 @@
+$ python -m pipeline.trigger   # raw data corrupted: one Age set to -22
+Change detected in: data. Triggering pipeline.
+Pipeline start | commit=874c77841b2b114b216bb5cc71901b855c041dcf | data_md5=e7a06e6aac5cd81aca851438485f0a16
+
+=== validate_and_prepare_data ===
+Data validation failed: Age outside 0 to 120
+
+Step 'validate_and_prepare_data' failed. Stopping. The serving model was not changed.
+
+Pipeline failed. Record: reports/pipeline_runs/run_20261110T023739Z.json

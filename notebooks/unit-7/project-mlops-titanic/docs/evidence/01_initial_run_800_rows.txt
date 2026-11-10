@@ -1,0 +1,30 @@
+$ python -m pipeline.trigger   # initial run, first 800 rows of the dataset
+Change detected in: first run. Triggering pipeline.
+Pipeline start | commit=874c77841b2b114b216bb5cc71901b855c041dcf | data_md5=4616b3e6ffe7bdc92d3ca8d13489fa42
+
+=== validate_and_prepare_data ===
+Validated 800 raw rows. Wrote 625 train and 175 test rows to /home/claude/titanic-mlops/data/processed.
+
+=== unit_tests ===
+..............                                                           [100%]
+14 passed in 1.11s
+
+=== eda ===
+EDA done: 800 rows, survival rate 38.5%, missing {'Age': 20.4, 'Cabin': 76.9, 'Embarked': 0.1}. Figures in eda/.
+
+=== train_gate_and_promote ===
+logistic_regression  cv_roc_auc=0.8688 cv_f1=0.7600 test_roc_auc=0.8340 test_f1=0.7612
+random_forest        cv_roc_auc=0.8689 cv_f1=0.7531 test_roc_auc=0.8419 test_f1=0.7619
+xgboost              cv_roc_auc=0.8621 cv_f1=0.7422 test_roc_auc=0.8370 test_f1=0.7442
+Promoted random_forest as version 1 (alias 'champion'). Test metrics: {'accuracy': 0.8286, 'precision': 0.8421, 'recall': 0.6957, 'f1': 0.7619, 'roc_auc': 0.8419}
+
+=== model_and_api_tests ===
+..................                                                       [100%]
+18 passed in 1.77s
+
+=== monitoring ===
+INFO holdout: drift_share=0.0 drifted=[] performance={'accuracy': 0.8286, 'precision': 0.8421, 'recall': 0.6957, 'f1': 0.7619, 'roc_auc': 0.8419}
+INFO simulated_drift: drift_share=0.5714 drifted=['Age', 'Fare', 'Pclass', 'Embarked'] performance={'accuracy': 0.8057, 'precision': 0.7869, 'recall': 0.6957, 'f1': 0.7385, 'roc_auc': 0.8306}
+INFO Monitoring complete: 2 alert(s), 0 on real data.
+
+Pipeline succeeded. Record: reports/pipeline_runs/run_20261110T023701Z.json

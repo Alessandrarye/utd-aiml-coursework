@@ -1,0 +1,53 @@
+# DVC pipeline: `dvc repro` re-runs only the stages whose inputs changed.
+stages:
+  prepare:
+    cmd: python -m src.data
+    deps:
+      - data/raw/titanic.csv
+      - src/data.py
+      - src/config.py
+    params:
+      - data
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+  eda:
+    cmd: python -m src.eda
+    deps:
+      - data/raw/titanic.csv
+      - src/eda.py
+      - src/features.py
+    outs:
+      - reports/eda
+
+  train:
+    cmd: python -m src.train
+    deps:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - src/train.py
+      - src/features.py
+    params:
+      - train
+      - gate
+    outs:
+      - models/model.joblib
+      - models/model_meta.json:
+          cache: false
+      - reports/figures
+    metrics:
+      - reports/metrics.json:
+          cache: false
+
+  monitor:
+    cmd: python -m src.monitor
+    deps:
+      - models/model.joblib
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - src/monitor.py
+    params:
+      - monitoring
+    outs:
+      - reports/monitoring

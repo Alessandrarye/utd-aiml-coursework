@@ -1,0 +1,38 @@
+# Single source of truth for pipeline settings. DVC tracks this file, so any
+# change here invalidates the affected stages and triggers a re-run.
+data:
+  raw_path: data/raw/titanic.csv
+  processed_dir: data/processed
+  test_size: 0.2                 # share of rows held out (stable hash split on PassengerId)
+  random_state: 42               # seed for cross-validation folds and models
+
+train:
+  cv_folds: 5
+  selection_metric: roc_auc      # candidate with the best mean CV score wins
+  experiment_name: titanic-survival
+  registered_model_name: titanic-survival-classifier
+  models:
+    logistic_regression:
+      C: 1.0
+      max_iter: 1000
+    random_forest:
+      n_estimators: 300
+      max_depth: 6
+      min_samples_leaf: 2
+    xgboost:
+      n_estimators: 300
+      max_depth: 3
+      learning_rate: 0.05
+      subsample: 0.8
+      colsample_bytree: 0.8
+
+# Quality gate: a new model is only promoted (and deployed) if it clears these.
+gate:
+  min_roc_auc: 0.80
+  min_f1: 0.70
+  max_regression: 0.02           # allowed ROC-AUC drop versus the current champion
+
+monitoring:
+  drift_share_threshold: 0.30    # alert when this share of features has drifted
+  max_f1_drop: 0.05              # alert when F1 falls this far below the training baseline
+  min_production_rows: 50        # rows needed in the API log before it is analysed

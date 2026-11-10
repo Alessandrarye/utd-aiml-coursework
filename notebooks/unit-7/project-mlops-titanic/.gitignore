@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.env
+
+# MLflow local store (use a remote tracking server to share runs)
+mlflow.db
+mlruns/
+mlartifacts/
+
+# Runtime state
+.pipeline_state.json
+monitoring/prediction_log.jsonl
+reports/pipeline_runs/
+
+# Pipeline outputs. DVC tracks these (see dvc.yaml), Git does not.
+/data/processed/
+/models/model.joblib
+/reports/eda/
+/reports/figures/
+/reports/monitoring/
+!/data/

@@ -1,0 +1,23 @@
+$ python -m pipeline.trigger   # params.yaml edited: gate.min_roc_auc raised from 0.80 to 0.95
+Change detected in: params. Triggering pipeline.
+Pipeline start | commit=874c77841b2b114b216bb5cc71901b855c041dcf | data_md5=4616b3e6ffe7bdc92d3ca8d13489fa42
+
+=== validate_and_prepare_data ===
+Validated 800 raw rows. Wrote 625 train and 175 test rows to /home/claude/titanic-mlops/data/processed.
+
+=== unit_tests ===
+..............                                                           [100%]
+14 passed in 0.99s
+
+=== eda ===
+EDA done: 800 rows, survival rate 38.5%, missing {'Age': 20.4, 'Cabin': 76.9, 'Embarked': 0.1}. Figures in eda/.
+
+=== train_gate_and_promote ===
+logistic_regression  cv_roc_auc=0.8688 cv_f1=0.7600 test_roc_auc=0.8340 test_f1=0.7612
+random_forest        cv_roc_auc=0.8689 cv_f1=0.7531 test_roc_auc=0.8419 test_f1=0.7619
+xgboost              cv_roc_auc=0.8621 cv_f1=0.7422 test_roc_auc=0.8370 test_f1=0.7442
+QUALITY GATE FAILED on ['roc_auc_above_min']. Test metrics: {'accuracy': 0.8286, 'precision': 0.8421, 'recall': 0.6957, 'f1': 0.7619, 'roc_auc': 0.8419}. Version 2 registered but NOT promoted.
+
+Step 'train_gate_and_promote' failed. Stopping. The serving model was not changed.
+
+Pipeline failed. Record: reports/pipeline_runs/run_20261110T023725Z.json

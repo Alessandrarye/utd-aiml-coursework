@@ -1,0 +1,30 @@
+$ python -m pipeline.trigger   # new data arrives: full 891-row dataset
+Change detected in: data. Triggering pipeline.
+Pipeline start | commit=874c77841b2b114b216bb5cc71901b855c041dcf | data_md5=2309cc5f04782ed9bb6016d9f4e381cf
+
+=== validate_and_prepare_data ===
+Validated 891 raw rows. Wrote 703 train and 188 test rows to /home/claude/titanic-mlops/data/processed.
+
+=== unit_tests ===
+..............                                                           [100%]
+14 passed in 0.97s
+
+=== eda ===
+EDA done: 891 rows, survival rate 38.4%, missing {'Age': 19.9, 'Cabin': 77.1, 'Embarked': 0.2}. Figures in eda/.
+
+=== train_gate_and_promote ===
+logistic_regression  cv_roc_auc=0.8792 cv_f1=0.7860 test_roc_auc=0.8412 test_f1=0.7692
+random_forest        cv_roc_auc=0.8769 cv_f1=0.7725 test_roc_auc=0.8547 test_f1=0.7647
+xgboost              cv_roc_auc=0.8819 cv_f1=0.7646 test_roc_auc=0.8485 test_f1=0.7737
+Promoted xgboost as version 3 (alias 'champion'). Test metrics: {'accuracy': 0.8351, 'precision': 0.8548, 'recall': 0.7067, 'f1': 0.7737, 'roc_auc': 0.8485}
+
+=== model_and_api_tests ===
+..................                                                       [100%]
+18 passed in 1.40s
+
+=== monitoring ===
+INFO holdout: drift_share=0.0 drifted=[] performance={'accuracy': 0.8351, 'precision': 0.8548, 'recall': 0.7067, 'f1': 0.7737, 'roc_auc': 0.8485}
+INFO simulated_drift: drift_share=0.5714 drifted=['Age', 'Fare', 'Pclass', 'Embarked'] performance={'accuracy': 0.7872, 'precision': 0.7536, 'recall': 0.6933, 'f1': 0.7222, 'roc_auc': 0.8316}
+INFO Monitoring complete: 3 alert(s), 0 on real data.
+
+Pipeline succeeded. Record: reports/pipeline_runs/run_20261110T023740Z.json

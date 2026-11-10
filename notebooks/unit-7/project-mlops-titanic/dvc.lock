@@ -1,0 +1,147 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python -m src.data
+    deps:
+    - path: data/raw/titanic.csv
+      hash: md5
+      md5: 2309cc5f04782ed9bb6016d9f4e381cf
+      size: 61194
+    - path: src/config.py
+      hash: md5
+      md5: ec5976994d36a9a94d756b51a08e2675
+      size: 1636
+    - path: src/data.py
+      hash: md5
+      md5: d3e8b82b49d3c0310bed47cf14d36606
+      size: 4018
+    params:
+      params.yaml:
+        data:
+          raw_path: data/raw/titanic.csv
+          processed_dir: data/processed
+          test_size: 0.2
+          random_state: 42
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: feccd644a954804bf9aac50204e8731b
+      size: 11534
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 5b7abe4804299bee91436f7193a35f48
+      size: 43626
+  eda:
+    cmd: python -m src.eda
+    deps:
+    - path: data/raw/titanic.csv
+      hash: md5
+      md5: 2309cc5f04782ed9bb6016d9f4e381cf
+      size: 61194
+    - path: src/eda.py
+      hash: md5
+      md5: ab764aa8b691263e2fb19a3354d078d5
+      size: 4627
+    - path: src/features.py
+      hash: md5
+      md5: a3c0f911965d830645188971daf77661
+      size: 4160
+    outs:
+    - path: reports/eda
+      hash: md5
+      md5: d7fa06d89e597e04b52f89f3d107977e.dir
+      size: 133042
+      nfiles: 4
+  train:
+    cmd: python -m src.train
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: feccd644a954804bf9aac50204e8731b
+      size: 11534
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 5b7abe4804299bee91436f7193a35f48
+      size: 43626
+    - path: src/features.py
+      hash: md5
+      md5: a3c0f911965d830645188971daf77661
+      size: 4160
+    - path: src/train.py
+      hash: md5
+      md5: 97f531137702bc74440407239a766056
+      size: 9830
+    params:
+      params.yaml:
+        gate:
+          min_roc_auc: 0.8
+          min_f1: 0.7
+          max_regression: 0.02
+        train:
+          cv_folds: 5
+          selection_metric: roc_auc
+          experiment_name: titanic-survival
+          registered_model_name: titanic-survival-classifier
+          models:
+            logistic_regression:
+              C: 1.0
+              max_iter: 1000
+            random_forest:
+              n_estimators: 300
+              max_depth: 6
+              min_samples_leaf: 2
+            xgboost:
+              n_estimators: 300
+              max_depth: 3
+              learning_rate: 0.05
+              subsample: 0.8
+              colsample_bytree: 0.8
+    outs:
+    - path: models/model.joblib
+      hash: md5
+      md5: ce136589d0f33182076a22854b678db6
+      size: 345088
+    - path: models/model_meta.json
+      hash: md5
+      md5: 62137b888ef3eb58b3ecc60415615ed4
+      size: 612
+    - path: reports/figures
+      hash: md5
+      md5: 81bc7be5068c008aec6be5d3023322ec.dir
+      size: 66100
+      nfiles: 2
+    - path: reports/metrics.json
+      hash: md5
+      md5: fa656f3ab82fc189cee69e0100700fc7
+      size: 1563
+  monitor:
+    cmd: python -m src.monitor
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: feccd644a954804bf9aac50204e8731b
+      size: 11534
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 5b7abe4804299bee91436f7193a35f48
+      size: 43626
+    - path: models/model.joblib
+      hash: md5
+      md5: ce136589d0f33182076a22854b678db6
+      size: 345088
+    - path: src/monitor.py
+      hash: md5
+      md5: a56b164123dc72b3d56b2a71e5d99649
+      size: 8693
+    params:
+      params.yaml:
+        monitoring:
+          drift_share_threshold: 0.3
+          max_f1_drop: 0.05
+          min_production_rows: 50
+    outs:
+    - path: reports/monitoring
+      hash: md5
+      md5: a405cc99c08c9d5ea0ce1a67fb48b6f4.dir
+      size: 12061764
+      nfiles: 5

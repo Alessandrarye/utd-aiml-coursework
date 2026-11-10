@@ -1,0 +1,21 @@
+$ curl -s http://localhost:8000/health
+{"status":"ok","model_loaded":true}
+
+$ curl -s -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d '{"Pclass":1,"Sex":"female","Age":38,"Fare":71.28,"Embarked":"C"}'   # no key
+{"detail":"Invalid or missing API key"}
+HTTP 401
+
+$ curl -s -X POST http://localhost:8000/predict -H "X-API-Key: $API_KEY" -H "Content-Type: application/json" -d '{"Pclass":1,"Sex":"female","Age":38,"SibSp":1,"Parch":0,"Fare":71.28,"Embarked":"C","Name":"Cumings, Mrs. John Bradley","Cabin":"C85"}'
+{"survived":1,"survival_probability":0.9773,"risk_level":"low","model_version":3}
+HTTP 200
+
+$ curl ... -d '{"Pclass":3,"Sex":"male","Age":22,"SibSp":1,"Parch":0,"Fare":7.25,"Embarked":"S"}'
+{"survived":0,"survival_probability":0.0428,"risk_level":"high","model_version":3}
+HTTP 200
+
+$ curl ... -d '{"Pclass":9,"Sex":"male","Age":-4}'   # invalid input
+{"detail":[{"type":"literal_error","loc":["body","Pclass"],"msg":"Input should be 1, 2 or 3","input":9,"ctx":{"expected":"1, 2 or 3"}},{"type":"greater_than_equal","loc":["body","Age"],"msg":"Input should be greater than or equal to 0","input":-4,"ctx":{"ge":0.0}}]}
+HTTP 422
+
+$ curl -s http://localhost:8000/model-info -H "X-API-Key: $API_KEY"
+{"model_name":"titanic-survival-classifier","model_version":3,"model_type":"xgboost","mlflow_run_id":"f400560da5d74e85855a7fa1a9992a82","git_sha":"874c77841b2b114b216bb5cc71901b855c041dcf","data_md5":"2309cc5f04782ed9bb6016d9f4e381cf","trained_at":"2026-11-10T02:37:54+00:00","sklearn_version":"1.9.1","test_metrics":{"accuracy":0.8351,"precision":0.8548,"recall":0.7067,"f1":0.7737,"roc_auc":0.8485},"input_features":["Pclass","Name","Sex","Age","SibSp","Parch","Fare","Cabin","Embarked"]}
